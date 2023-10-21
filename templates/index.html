@@ -1,0 +1,564 @@
+{% extends 'link.html' %}
+
+{% block content %}
+ 
+<script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/list.pagination.js/0.1.1/list.pagination.min.js"></script>
+
+
+
+
+        <!-- Carousel Start -->
+        <div class="container-fluid p-0">
+            <div class="owl-carousel header-carousel position-relative">
+                <div class="owl-carousel-item position-relative">
+                    <img class="img-fluid" src="/static/img/carousel-1.jpg" alt="">
+                    <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" style="background: rgba(43, 57, 64, .5);">
+                        <div class="container">
+                            <div class="row justify-content-start">
+                                <div class="col-10 col-lg-8">
+                                    <h1 class="display-3 text-white animated slideInDown mb-4">Find The Perfect Job That You Deserved</h1>
+                                    <p class="fs-5 fw-medium text-white mb-4 pb-2">Vero elitr justo clita lorem. Ipsum dolor at sed stet sit diam no. Kasd rebum ipsum et diam justo clita et kasd rebum sea elitr.</p>
+                                    <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Search A Job</a>
+                                    <a href="" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">Find A Talent</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="owl-carousel-item position-relative">
+                    <img class="img-fluid" src="/static/img/carousel-2.jpg" alt="">
+                    <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" style="background: rgba(43, 57, 64, .5);">
+                        <div class="container">
+                            <div class="row justify-content-start">
+                                <div class="col-10 col-lg-8">
+                                    <h1 class="display-3 text-white animated slideInDown mb-4">Find The Best Startup Job That Fit You</h1>
+                                    <p class="fs-5 fw-medium text-white mb-4 pb-2">Vero elitr justo clita lorem. Ipsum dolor at sed stet sit diam no. Kasd rebum ipsum et diam justo clita et kasd rebum sea elitr.</p>
+                                    <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Search A Job</a>
+                                    <a href="" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">Find A Talent</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<style>
+    #id_title__contains ,#id_category5, #id_viloyat5{
+width: 300px !important;
+    }
+</style>
+        <!-- Search Start -->
+        <div class="container-fluid bg-primary mb-5 wow fadeIn" data-wow-delay="0.1s" style="padding: 35px;">
+            
+                    <form style="display: flex; justify-content: center; flex-wrap: wrap; gap: 5px; align-items: center;" method="get">
+                      
+                        <!-- {{ filter.form.as_p }}  -->
+
+                          {% for x in  user_filter1.form %}
+                              {{x}}
+                          {% endfor %}
+                        <input  data-toggle="modal" data-target="#exampleModal" style="width: 300px;" value="Qidirmoq" class="btn btn-warning" id="idbtn" type="submit"> 
+                    </form>
+     
+
+
+
+
+        </div>
+        <!-- Search End -->
+
+
+
+        <ul class="container">
+         <center>
+            {% if user_filter1.qs|length == 0 %}
+            <h4>Ish topilmadi <a href="/">Barcha ish</a></h4>
+            {% elif list|length == user_filter1.qs|length%}
+            <h4>Barcha ishlar soni {{user_filter1.qs|length}}-ta</h4>
+            {% else %}
+            <h4>Biz {{user_filter1.qs|length}}-ta ish topdik <a href="/">Barcha ish</a></h4>
+            {% endif %}
+
+        </center>
+
+<style>
+    .pagination .active a{
+background:#ffc107 !important;
+border-color: #ffc107 !important;
+color: black !important;
+    }
+</style>
+           <div style="display: flex; flex-direction: column-reverse; gap: 10px;" id="test-list">
+        <div  class="pagination" style="display: flex ;  justify-content: center; gap: 15px;"></div> 
+        <div class="list">
+        {% for user in user_filter1.qs   %}
+            <div class="name">
+            <div class="job-item p-4 mb-2  border border-1 border-primary " style="border-radius: 10px !important;">
+            <div class="row g-4">
+                <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                    <div class="text-start">
+                        <h5 class="mb-3" style="text-transform: capitalize;">{{ user.title }}</h5>
+                        <div class="d-flex gap-1 flex-wrap">
+                        <div style="word-wrap:break-word !important; text-wrap:wrap;" class="text-truncate me-3 "><i class="fa fa-map-marker-alt text-primary me-2"></i>{{user.viloyat5}} , {{user.manzil}}</div>
+                        <div style="word-wrap:break-word !important; text-wrap:wrap;" class="text-truncate me-3 "><i class="fa fa-list-alt text-primary me-1" aria-hidden="true"></i>  {{user.category5}}</div>
+                        <div style="word-wrap:break-word !important; text-wrap:wrap;" class="text-truncate me-3 "><i class="far fa-money-bill-alt text-primary me-2"></i>${{user.pricemin}} - ${{user.pricemax}}</div>
+                        <div style="word-wrap:break-word !important; text-wrap:wrap;" class="text-truncate me-0 "><i class="far fa-calendar-alt text-primary me-2"></i> {{user.time}}</div>
+                    </div>
+
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                    <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+                         <img width="30" height="30" id="id{{user.id}}" onclick="localStorage.setItem('like{{user.id}}' , '{{user.id}}')" src="" alt="">
+                        <a style="position: relative;" class="btn btn-primary" href="detail/{{user.id}}/"> Apply Now 
+                            <div style="width: 30px; border-radius: 10px; font-size: smaller; height: 30px;display: flex;justify-content: center; align-items: center; background-color: #ffc107; position: absolute; top: -25px; right: -10px;" class=" text-truncate text-dark">
+                        {% if user.counter|length == 0  %}
+                            0
+                         {% else %}
+                         {{user.counter}}
+                         {% endif %}
+                         
+                        </div>
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+            </div>
+            </div>
+
+        {% endfor %}
+        </div>  
+  </div>
+    </ul>
+    
+
+        
+
+
+    
+
+
+        <!-- Category Start -->
+        <div class="container-xxl py-5">
+            <div class="container">
+                <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Explore By Category</h1>
+                <div class="row g-4">
+                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <a class="cat-item rounded p-4" href="">
+                            <i class="fa fa-3x fa-mail-bulk text-primary mb-4"></i>
+                            <h6 class="mb-3">Marketing</h6>
+                            <p class="mb-0">123 Vacancy</p>
+                        </a>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
+                        <a class="cat-item rounded p-4" href="">
+                            <i class="fa fa-3x fa-headset text-primary mb-4"></i>
+                            <h6 class="mb-3">Customer Service</h6>
+                            <p class="mb-0">123 Vacancy</p>
+                        </a>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
+                        <a class="cat-item rounded p-4" href="">
+                            <i class="fa fa-3x fa-user-tie text-primary mb-4"></i>
+                            <h6 class="mb-3">Human Resource</h6>
+                            <p class="mb-0">123 Vacancy</p>
+                        </a>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
+                        <a class="cat-item rounded p-4" href="">
+                            <i class="fa fa-3x fa-tasks text-primary mb-4"></i>
+                            <h6 class="mb-3">Project Management</h6>
+                            <p class="mb-0">123 Vacancy</p>
+                        </a>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <a class="cat-item rounded p-4" href="">
+                            <i class="fa fa-3x fa-chart-line text-primary mb-4"></i>
+                            <h6 class="mb-3">Business Development</h6>
+                            <p class="mb-0">123 Vacancy</p>
+                        </a>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
+                        <a class="cat-item rounded p-4" href="">
+                            <i class="fa fa-3x fa-hands-helping text-primary mb-4"></i>
+                            <h6 class="mb-3">Sales & Communication</h6>
+                            <p class="mb-0">123 Vacancy</p>
+                        </a>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
+                        <a class="cat-item rounded p-4" href="">
+                            <i class="fa fa-3x fa-book-reader text-primary mb-4"></i>
+                            <h6 class="mb-3">Teaching & Education</h6>
+                            <p class="mb-0">123 Vacancy</p>
+                        </a>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
+                        <a class="cat-item rounded p-4" href="">
+                            <i class="fa fa-3x fa-drafting-compass text-primary mb-4"></i>
+                            <h6 class="mb-3">Design & Creative</h6>
+                            <p class="mb-0">123 Vacancy</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Category End -->
+
+
+        <!-- About Start -->
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="row g-5 align-items-center">
+                    <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                        <div class="row g-0 about-bg rounded overflow-hidden">
+                            <div class="col-6 text-start">
+                                <img class="img-fluid w-100" src="/static/img/about-1.jpg">
+                            </div>
+                            <div class="col-6 text-start">
+                                <img class="img-fluid" src="/static/img/about-2.jpg" style="width: 85%; margin-top: 15%;">
+                            </div>
+                            <div class="col-6 text-end">
+                                <img class="img-fluid" src="/static/img/about-3.jpg" style="width: 85%;">
+                            </div>
+                            <div class="col-6 text-end">
+                                <img class="img-fluid w-100" src="/static/img/about-4.jpg">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+                        <h1 class="mb-4">We Help To Get The Best Job And Find A Talent</h1>
+                        <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
+                        <p><i class="fa fa-check text-primary me-3"></i>Tempor erat elitr rebum at clita</p>
+                        <p><i class="fa fa-check text-primary me-3"></i>Aliqu diam amet diam et eos</p>
+                        <p><i class="fa fa-check text-primary me-3"></i>Clita duo justo magna dolore erat amet</p>
+                        <a class="btn btn-primary py-3 px-5 mt-3" href="">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- About End -->
+
+
+
+        <!-- Testimonial Start -->
+        <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="container">
+                <h1 class="text-center mb-5">Mijozlardan kelgan habarlar!!!</h1>
+                <div class="owl-carousel testimonial-carousel">
+                    
+                    {% for m in messages %}
+                                                
+                    <div class="testimonial-item bg-light rounded p-4">
+                        <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
+                        <p>{{m.body}}</p>
+                        <div class="d-flex align-items-center">
+                            <img class="img-fluid flex-shrink-0 rounded" src="/media/{{m.img}}" style="width: 50px; height: 50px;">
+                            <div class="ps-3">
+                                <h5 class="mb-1">{{m.name}}</h5>
+                             
+                            <div >
+                                <small>{{m.rating}}</small>
+                                {% if m.rating == 0 %}
+                                <i  class="fa fa-star" aria-hidden="true"></i>
+                                <i  class="fa fa-star" aria-hidden="true"></i>
+                                <i  class="fa fa-star" aria-hidden="true"></i>
+                                <i  class="fa fa-star" aria-hidden="true"></i>
+                                <i  class="fa fa-star" aria-hidden="true"></i>
+                                {% elif m.rating == 1%}
+                                <i style="color: #ffc107 !important;" class="fa fa-star text-warning" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                {% elif m.rating == 2%}
+                                <i style="color: #ffc107 !important;" class="fa fa-star text-warning" aria-hidden="true"></i>
+                                <i style="color: #ffc107 !important;" class="fa fa-star text-warning" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                {% elif m.rating == 3%}
+                                <i style="color: #ffc107 !important;" class="fa fa-star text-warning" aria-hidden="true"></i>
+                                <i style="color: #ffc107 !important;" class="fa fa-star text-warning" aria-hidden="true"></i>
+                                <i style="color: #ffc107 !important;" class="fa fa-star text-warning" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                {% elif m.rating == 4%}
+                                <i style="color: #ffc107 !important;" class="fa fa-star text-warning" aria-hidden="true"></i>
+                                <i style="color: #ffc107 !important;" class="fa fa-star text-warning" aria-hidden="true"></i>
+                                <i style="color: #ffc107 !important;" class="fa fa-star text-warning" aria-hidden="true"></i>
+                                <i style="color: #ffc107 !important;" class="fa fa-star text-warning" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                {% elif m.rating == 5 %}
+                                <i style="color: #ffc107 !important;" class="fa fa-star text-warning" aria-hidden="true"></i>
+                                <i style="color: #ffc107 !important;" class="fa fa-star text-warning" aria-hidden="true"></i>
+                                <i style="color: #ffc107 !important;" class="fa fa-star text-warning" aria-hidden="true"></i>
+                                <i style="color: #ffc107 !important;" class="fa fa-star text-warning" aria-hidden="true"></i>
+                                <i style="color: #ffc107 !important;" class="fa fa-star text-warning" aria-hidden="true"></i>
+                                {% else %}
+                                {% endif %}
+                                
+                            </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+            <!-- Button trigger modal -->
+<br>
+  <center>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Habar yozish
+      </button>
+
+</center>
+
+  
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form method="POST" enctype="multipart/form-data" class="w-100 d-flex flex-column gap-2 align-items-center">
+               {% csrf_token %}
+                <input required name="name" maxlength="20" placeholder="Ismingiz" class="form-control" style="width: 300px;" type="text">
+                <textarea required name="body" maxlength="200" placeholder="Habaringiz" class="form-control" style="width: 300px; height: 150px; resize: none;"   id="" cols="30" rows="10"></textarea>
+                <input  type="file" name="img55" required class="form-control" style="width: 300px;"  accept="image/*" >
+                <input required name="rating" hidden id="ff" placeholder="" class="form-control" style="width: 300px;" type="text">
+                
+                <div class="rating">
+                    <span class="rating__result"></span> 
+                   <i class="rating__star far fa-star"></i>
+                   <i class="rating__star far fa-star"></i>
+                   <i class="rating__star far fa-star"></i>
+                   <i class="rating__star far fa-star"></i>
+                   <i class="rating__star far fa-star"></i>
+                </div>
+                <input type="submit" value="Jo'natish">
+
+            </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+<script>
+const ratingStars = [...document.getElementsByClassName("rating__star")];
+const ratingResult = document.querySelector(".rating__result");
+
+printRatingResult(ratingResult);
+
+function executeRating(stars, result) {
+   const starClassActive = "rating__star fas fa-star";
+   const starClassUnactive = "rating__star far fa-star";
+   const starsLength = stars.length;
+   let i;
+   stars.map((star) => {
+      star.onclick = () => {
+         i = stars.indexOf(star);
+
+         if (star.className.indexOf(starClassUnactive) !== -1) {
+            printRatingResult(result, i + 1);
+            for (i; i >= 0; --i) stars[i].className = starClassActive;
+         } else {
+            printRatingResult(result, i);
+            for (i; i < starsLength; ++i) stars[i].className = starClassUnactive;
+         }
+      };
+   });
+}
+
+function printRatingResult(result, num = 0) {
+   result.textContent = ``;
+   document.getElementById('ff').value = num
+
+}
+
+executeRating(ratingStars, ratingResult);
+</script>
+
+        </div>
+        <!-- Testimonial End -->
+        
+<style>
+    .owl-dots .active{
+        background-color: #ffc107;
+    }
+</style>
+        <!-- Footer Start -->
+        <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
+            <div class="container py-5">
+                <div class="row g-5">
+                    <div class="col-lg-3 col-md-6">
+                        <h5 class="text-white mb-4">Company</h5>
+                        <a class="btn btn-link text-white-50" href="">About Us</a>
+                        <a class="btn btn-link text-white-50" href="">Contact Us</a>
+                        <a class="btn btn-link text-white-50" href="">Our Services</a>
+                        <a class="btn btn-link text-white-50" href="">Privacy Policy</a>
+                        <a class="btn btn-link text-white-50" href="">Terms & Condition</a>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h5 class="text-white mb-4">Quick Links</h5>
+                        <a class="btn btn-link text-white-50" href="">About Us</a>
+                        <a class="btn btn-link text-white-50" href="">Contact Us</a>
+                        <a class="btn btn-link text-white-50" href="">Our Services</a>
+                        <a class="btn btn-link text-white-50" href="">Privacy Policy</a>
+                        <a class="btn btn-link text-white-50" href="">Terms & Condition</a>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h5 class="text-white mb-4">Contact</h5>
+                        <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Rewa, Madhya Pradesh, IND</p>
+                        <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+91991919191</p>
+                        <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@ajaykumar.com</p>
+                        <div class="d-flex pt-2">
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h5 class="text-white mb-4">Newsletter</h5>
+                        <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
+                        <div class="position-relative mx-auto" style="max-width: 400px;">
+                            <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
+                            <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="copyright">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                            &copy; <a class="border-bottom" href="#">Your Site Name</a>, All Right Reserved. 
+							
+							<!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+							Designed By <a class="border-bottom" href="">Code By Ajay Kumar</a>
+                        </div>
+                        <div class="col-md-6 text-center text-md-end">
+                            <div class="footer-menu">
+                                <a href="">Home</a>
+                                <a href="">Cookies</a>
+                                <a href="">Help</a>
+                                <a href="">FQAs</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+
+        <a href="#"  class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+
+
+    <script>
+        '{% for i in user_filter1.qs  %}'
+        if(localStorage.getItem('like{{i.id}}')  !=  null){
+        
+            document.getElementById('id{{i.id}}').setAttribute('onclick', 'localStorage.removeItem(`like{{i.id}}`)')
+            document.getElementById('id{{i.id}}').src = 'static/redyurak.png'
+        }
+        
+        else if(localStorage.getItem('like{{i.id}}')  ==  null){
+        
+            document.getElementById('id{{i.id}}').src = 'static/blackyurak.png'
+            document.getElementById('id{{i.id}}').setAttribute('onclick', 'localStorage.setItem(`like{{i.id}}` ,`{{i.id}}`)')
+        }
+        else{
+           
+        }
+        '{% endfor %} '
+
+    '{% for i in user_filter1.qs  %}'
+        document.getElementById('id{{i.id}}').addEventListener("click",(e)=>{
+        e.preventDefault()
+          
+        if(localStorage.getItem('like{{i.id}}')  !=  null){
+        
+            document.getElementById('id{{i.id}}').setAttribute('onclick', 'localStorage.removeItem(`like{{i.id}}`)')
+            document.getElementById('id{{i.id}}').src = 'static/redyurak.png'
+        }
+        
+        else if(localStorage.getItem('like{{i.id}}')  ==  null){
+        
+            document.getElementById('id{{i.id}}').src = 'static/blackyurak.png'
+            document.getElementById('id{{i.id}}').setAttribute('onclick', 'localStorage.setItem(`like{{i.id}}` ,`{{i.id}}`)')
+        }else{
+            console.log();
+        }
+        
+        })
+
+    '{% endfor %} '
+
+
+
+
+    </script>
+
+
+<script>
+
+var monkeyList = new List('test-list', {
+  valueNames: ['name'],
+  page: 10,
+  pagination: [{
+      paginationClass: "pagination",
+      outerWindow: 1,
+    }
+]
+
+
+});
+
+addEventListener("click",()=>{
+    for (const iterator of document.querySelector('.pagination').children) {
+    iterator.children[0].setAttribute('class','btn btn-primary panigbutton')
+}
+
+})
+
+
+for (const iterator of document.querySelector('.pagination').children) {
+  
+  iterator.children[0].setAttribute('class','btn btn-primary panigbutton')
+
+}
+
+   document.getElementById('id_title__contains').placeholder = 'Qidirmoqchi bolgan ishingizni yozing'
+  
+      document.getElementById('id_viloyat5').className = 'form-select'
+      document.getElementById('id_category5').className = 'form-select'
+    document.getElementById('id_viloyat5').children[0].innerHTML = 'Barcha viloyat'
+    document.getElementById('id_category5').children[0].innerHTML = 'Barcha category'
+
+      document.getElementById('id_title__contains').className = 'form-control'
+
+
+
+
+
+</script>
+
+
+
+
+
+{% endblock content %}
+    

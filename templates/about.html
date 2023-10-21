@@ -1,0 +1,66 @@
+{% extends 'link.html' %}
+
+{% block content %}
+        <!-- Header End -->
+        <div class="container-xxl py-5 bg-dark page-header mb-5">
+            <div class="container my-1 pt-2 pb-2">
+                <h1 class="display-3 text-white mb-3 animated slideInDown">Job qoshish</h1>
+            </div>
+        </div>
+        <!-- Header End -->
+
+<center>
+
+
+<form  action="" method="POST">
+{% csrf_token %}
+
+{% for x in form %}
+    <div style="width: 300px; margin: 5px 0;">{{x}}</div>
+{% endfor %}
+    
+
+<input id="checbtn" style="width: 300px !important;" placeholder="" class="btn btn-danger" type="submit">
+
+</form>
+</center><br><br>
+<style>
+    #id_body{
+        resize: none;
+    }
+</style>
+<script>
+    
+addEventListener("input",()=>{
+    if (Number( document.getElementById('id_pricemax').value) > Number( document.getElementById('id_pricemin').value)) {
+    document.getElementById('checbtn').removeAttribute('disabled')
+    }else{
+    document.getElementById('checbtn').setAttribute('disabled','')
+    }
+
+})
+
+document.getElementById('id_title').setAttribute('class','form-control w-100')
+document.getElementById('id_title').setAttribute('placeholder','Ish nomi')
+document.getElementById('id_body').setAttribute('class','form-control w-100')
+document.getElementById('id_body').setAttribute('placeholder','Ish haqida batafsil')
+document.getElementById('id_pricemin').setAttribute('class','form-control w-100')
+document.getElementById('id_pricemin').setAttribute('placeholder','Boshlangich narh $')
+document.getElementById('id_pricemax').setAttribute('class','form-control w-100')
+document.getElementById('id_pricemax').setAttribute('placeholder','Oxirgi narh Katta bolsin $')
+document.getElementById('id_manzil').setAttribute('class','form-control w-100')
+document.getElementById('id_manzil').setAttribute('placeholder','Manzil')
+document.getElementById('id_phoneNumber').setAttribute('class','form-control w-100')
+document.getElementById('id_phoneNumber').setAttribute('placeholder','Telefon raqam')
+document.getElementById('id_category5').setAttribute('class','form-select w-100')
+document.getElementById('id_category5').children[0].innerHTML = 'Category'
+document.getElementById('id_viloyat5').setAttribute('class','form-select w-100')
+document.getElementById('id_viloyat5').children[0].innerHTML = 'Viloyat'
+
+
+</script>
+
+
+
+
+    {% endblock content %}

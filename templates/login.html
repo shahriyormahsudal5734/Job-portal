@@ -1,0 +1,30 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <title>Login</title>
+</head>
+<body>
+ 
+   
+<center>
+
+    <h1>Login</h1>
+<form method="POST">
+    {% csrf_token %}
+
+    {% for x in form %}
+       
+        <div >  <div class=" text-primary"> {{x.label}} </div> {{x}}</div>
+    {% endfor %}
+        
+<br>
+    <button type="submit" class="btn btn-primary">Login</button>
+    <a href="{% url 'signup' %}">Dont have Account Create</a>
+</form>
+</center>
+</body>
+</html>
